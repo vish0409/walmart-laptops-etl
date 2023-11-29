@@ -1,0 +1,12 @@
+S3 Buckets: 
+walmart-extracted-data :- The etl python script will run on an AWS EC2 Instance and upload the .json files. Therefore, this bucket will contain the json data for the first 5 pages.
+walmart-transformed-data: This bucket contains the .csv file from the  etl python. This file is used in Crawlers and Glue ETL Jobs.
+walmart-output-data: This bucket contains the result of the Glue job as well as SQL query results from Athena
+walmart-scripts: This contains the python script that is automatically generated when running the Glue Job
+
+Glue Crawlers:
+s3-to-walmart-laptops: This Glue Crawler takes the .csv file from the walmart-transformed-data bucket and uploads it onto the walmart-laptops database that exists in AWS Glue Data Catalog
+s3-to-walmart-laptops-clean: This Glue Crawler takes the result file from the walmart-output-data bucket and uploads it onto the walmart-laptops-clean database that exists in AWS Glue Data Catalog. This database and table will be used in AWS Athena to perform analysis using SQL
+
+Glue ETL Job:
+walmart-laptops-etl: This Glue Job extracts the table from the walmart-laptops database and transforms it by adjusting its schema, datatypes and dropping a few columns.It then uploads the transformed table into thr walmart-output-data bucket.
