@@ -1,0 +1,85 @@
+# Data Analysis
+
+# Basic statistics
+select count(*) as no_of_laptops,avg(current_price) as avg_price,max(current_price) as max_price, min(current_price) as min_price,avg(savings) as avg_savings,max(savings) as max_savings ,avg(avg_rating) as avg_rating
+from "AwsDataCatalog"."walmart-laptops-clean"."walmart_output_data"
+where current_price is not null
+
+
+#Number of laptops, average price and savings per brand:
+SELECT 
+    brand,
+    COUNT(*) as no_of_laptops,
+    round(AVG(current_price),2) as average_price,
+    round(SUM(savings),2) as savings_sum
+FROM "AwsDataCatalog"."walmart-laptops-clean"."walmart_output_data"
+GROUP BY brand
+HAVING AVG(current_price) IS NOT NULL
+ORDER BY no_of_laptops DESC
+
+# Most popular brands based on their flags
+
+select flag,max(brand) as most_popular_brand,COUNT(*) as frequency
+from "AwsDataCatalog"."walmart-laptops-clean"."walmart_output_data"
+group by flag
+having max(brand) is not NULL
+
+# Most Popular Brands by reviews and ratings
+select brand,sum(reviews) as total_reviews,round(AVG(avg_rating),1) as avg_rating
+from "AwsDataCatalog"."walmart-laptops-clean"."walmart_output_data"
+group by brand
+having sum(reviews) is not null
+order by sum(reviews) desc
+
+# Most popular brand by seller
+select seller_name,max(brand) as most_popular_brand,count(*) as frequency
+from "AwsDataCatalog"."walmart-laptops-clean"."walmart_output_data"
+group by seller_name
+having max(brand) is not null
+order by frequency desc
+
+
+#Price groups
+SELECT 
+  CASE 
+    WHEN current_price < 500 THEN '<500'
+    WHEN current_price BETWEEN 500 AND 999 THEN '500-999'
+    WHEN current_price BETWEEN 1000 AND 1499 THEN '1000-1499'
+    WHEN current_price BETWEEN 1500 AND 1999 THEN '1500-1999'
+    ELSE '>2000'
+  END AS price_group,
+  COUNT(*) AS num_laptops,
+  max(brand) as most_popular_brand
+FROM "AwsDataCatalog"."walmart-laptops-clean"."walmart_output_data"
+WHERE current_price IS NOT NULL
+GROUP BY 
+  CASE 
+    WHEN current_price < 500 THEN '<500'
+    WHEN current_price BETWEEN 500 AND 999 THEN '500-999'
+    WHEN current_price BETWEEN 1000 AND 1499 THEN '1000-1499'
+    WHEN current_price BETWEEN 1500 AND 1999 THEN '1500-1999'
+    ELSE '>2000'
+  END
+ORDER BY num_laptops DESC;
+
+# Laptop price based on each rating and their savings
+select avg_rating,round(AVG(current_price),2) as average_price,round(AVG(savings),2) as average_savings
+from "AwsDataCatalog"."walmart-laptops-clean"."walmart_output_data"
+where current_price is not null
+group by avg_rating
+order by avg(current_price) desc
+
+#Flags and their savings
+select flag, round(sum(savings),2) as total_savings, round(avg(savings),2) as average_savings,count(*) as count_of_laptops
+from "AwsDataCatalog"."walmart-laptops-clean"."walmart_output_data"
+where savings is not null and flag !='None'
+group by flag
+order by sum(savings) desc
+
+# Average price and total savings for each seller
+
+select seller_name, round(sum(savings),2) as total_savings,round(avg(current_price),2) as avg_price
+from "AwsDataCatalog"."walmart-laptops-clean"."walmart_output_data"
+where current_price is not null and savings>0.0
+group by seller_name
+order by sum(savings) desc
