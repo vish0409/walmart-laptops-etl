@@ -16,7 +16,7 @@ The python script **walmart_etl.py** contains the code necessary to perform the 
  * Transform the JSON documents into a Dataframe and clean the data.
  * Upload the clean data onto the **walmart-transformed-data** bucket as a .csv file.
 
-This script will run on the AWS EC2 engine using the Command Line Interface (CLI). Exeption Handling is imbedded into the script to account for any errors that may come up. 
+This script will run on the AWS EC2 engine using the Command Line Interface (the **ec2.sh** shell script demonstrates this). Exeption Handling is imbedded into the script to account for any errors that may come up. 
 
 
 
