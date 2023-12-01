@@ -19,22 +19,29 @@ The python script **walmart_etl.py** contains the code necessary to perform the 
  * Transform the JSON documents into a Dataframe and clean the data.
  * Upload the cleaned table, **transformed_laptop_data.csv**, onto the **walmart-transformed-data** bucket
 
-*NOTE:This script will run on the AWS EC2 engine using the Command Line Interface (the **ec2.sh** shell script demonstrates this). Exeption Handling is imbedded into the script to account for any errors that may come up.* 
+*NOTE:This script will run on the AWS EC2 engine using the Command Line Interface (the **ec2.sh** shell script demonstrates this). Exception Handling is imbedded into the script to account for any errors that may come up.* 
 
 
 ### Transform:
 The Transformation is done on AWS Glue, an event-driven ETL Service. Two components of the AWS Glue service are used for this project: **Glue Data Catalog** (which contains Glue Crawlers and Databases) & **Glue ETL Jobs**. 
 The crawlers are useful for importing data from S3 buckets into the data catalog databses. Whereas, the ETL Jobs are made to adjust datatypes, schema and drop any unnecessary columns. 
 
-* The **s3-to-walmart-laptops**  Glue Crawler takes the .csv file from the previous step and uploads it onto a database named **walmart-laptops**
-* The ETL Glue Job is then designed to source the table from the database, adjust necessary datatypes and **drop** the following columns: *Seller Id* and *Product Variants*. After which, it uploads the transformed dataset into the **walmart-output-data** S3 bucket. It is exported as a CSV using GZIP compression. 
-
+  * The **s3-to-walmart-laptops**  Glue Crawler takes the .csv file from the previous step and uploads it onto a database named **walmart-laptops**
+  * The ETL Glue Job is then designed to source the table from the database, adjust necessary datatypes and **drop** the following columns: *Seller Id* and *Product Variants*. After which, it uploads the transformed dataset into the **walmart-output-data** S3 bucket. It is exported as a CSV using GZIP compression. 
+  
 
 ## Load:
 The Loading section is triggered with another Crawler, which is set up to take the CSV file from the walmart-output-data bucket and upload it onto the **walmart-laptops-clean** database.
 This database is then used in AWS Athena, a service that helps us analyze data suing SQL. All query results are saved in the **walmart-output-data** S3 bucket.
 
 *NOTE: The queries performed can be found in the athena_sql_queries.txt file*
+
+## References:
+The following two articles have been used to gain basic knowledge of the services offered by AWS for this project:
+https://medium.com/@aimee.tang0317/beginners-guide-to-aws-how-to-run-a-python-script-stored-in-s3-on-ec2-f05730c500e7
+https://medium.com/@aimee.tang0317/how-to-create-a-powerful-etl-data-pipeline-with-python-and-aws-services-6ad8ddd7ca1b
+
+
 
 
 
