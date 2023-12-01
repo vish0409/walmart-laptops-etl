@@ -30,7 +30,7 @@ The crawlers are useful for importing data from S3 buckets into the data catalog
   * The ETL Glue Job is then designed to source the table from the database, adjust necessary datatypes and **drop** the following columns: *Seller Id* and *Product Variants*. After which, it uploads the transformed dataset into the **walmart-output-data** S3 bucket. It is exported as a CSV using GZIP compression. 
   
 
-## Load:
+### Load:
 The Loading section is triggered with another Crawler, which is set up to take the CSV file from the walmart-output-data bucket and upload it onto the **walmart-laptops-clean** database.
 This database is then used in AWS Athena, a service that helps us analyze data suing SQL. All query results are saved in the **walmart-output-data** S3 bucket.
 
@@ -39,6 +39,7 @@ This database is then used in AWS Athena, a service that helps us analyze data s
 ## References:
 The following two articles have been used to gain basic knowledge of the services offered by AWS for this project:
 https://medium.com/@aimee.tang0317/beginners-guide-to-aws-how-to-run-a-python-script-stored-in-s3-on-ec2-f05730c500e7
+
 https://medium.com/@aimee.tang0317/how-to-create-a-powerful-etl-data-pipeline-with-python-and-aws-services-6ad8ddd7ca1b
 
 
