@@ -8,7 +8,7 @@ The project leverages data sourced from the Axesso - Walmart Data Service API, c
 The Axesso - Walmart Data Service provides real time data listed on the **Walmart** website. This includes search results, product information, deals, prices, ratings, reviews and more. For this project, the search results for "Laptops" are extracted from the first 5 pages to determine different measures and dimensions.
 
 ## Project Goals &  Outline:
-The goal of this project is to see what Laptops from Walmart are popular and in demand with regards to their brand, price, reviews and savings. Running this pipeline frequently will let us know any real-time shifts in customer preferences and pricing.
+The goal of this project is to see what Laptops from Walmart are popular and in demand with regards to their **brand, price, ratings and savings**.Running this pipeline frequently will let us know any real-time shifts in customer preferences.
 The methods taken to process and analyze the data will be detailed in three steps : Extract, Transform, Load.
 
 
