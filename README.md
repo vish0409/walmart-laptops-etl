@@ -36,6 +36,26 @@ This database is then used in AWS Athena, a service that helps us analyze data s
 
 *NOTE: The queries performed can be found in the athena_sql_queries.txt file*
 
+## Findings:
+As of **December 2023**, the insights gained from the first 5 pages of search results for Laptops on the Walmart onine retail store are:
+ * **Basic Statistics:-** Average Price: $465; Max Price: $2009; Average savings: $87; Max savings: $1140; Average rating: 3.5
+ * **Brand and Rating Analysis:**
+     * Most number of laptops: HP (30% of laptops were from this brand)
+     * Highest average price: MSI
+     * Highest savings: SGIN
+     * Top brands (with a rating of 3.8 or higher) include: HP, Lenovo, SGIN,Windows, MSI, Asus and Dell.
+  * **Price and Savings Analysis**:
+     * 72% of laptops are prices below $500
+     * Samsung laptops are the most frequent when the price is between >$500 but <$1000
+     * MSI laptops are the most frequent when the price is >$1000
+     * The average savings are >$100 when the laptops are price >$700
+     * SGIN Official Store seller had the most savings, summing upto $4620 with an average price of $311
+     * The official Walmart seller was the 4th highest in terms of savings, with the savings summing upto $1500 and an average price of $394
+     * The Black Friday deal offered the highest savings (total sum: $3345) and showed up for 20 laptops in total.
+     * However, the Flash Deal offered the highest average savings (average: $430).
+       
+   *NOTE: The points mentioned above are subjected to change with time*
+
 ## References:
 The following two articles have been used to gain basic knowledge of the services offered by AWS for this project:
 https://medium.com/@aimee.tang0317/beginners-guide-to-aws-how-to-run-a-python-script-stored-in-s3-on-ec2-f05730c500e7
